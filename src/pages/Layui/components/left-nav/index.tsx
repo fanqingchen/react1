@@ -24,7 +24,7 @@ interface IState {
   menuList: List[],
 
 }
-export default class LeftNav extends React.Component<IProps, IState> {
+class LeftNav extends React.Component<IProps, IState> {
   constructor(props: any, context: any) {
     super(props)
     this.state = {
@@ -80,5 +80,5 @@ export default class LeftNav extends React.Component<IProps, IState> {
     )
   }
 }
-
-// withRouter(LeftNav)
+// @ts-ignore
+export default  withRouter(LeftNav)

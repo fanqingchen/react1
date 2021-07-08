@@ -32,7 +32,11 @@ const columns:any= [
        title: '应用logo',
        dataIndex: 'name',
        key: 'name',
+       width:100,
        align:"center",
+       render:()=>{
+         return <img className="table-img" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F16%2F07%2F06%2F17577cd55945262.jpg%21r650&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1628319216&t=5989b051dc6080029c0b8648eeb22b56" alt="图片" />
+       }
      },
      {
        title: '应用名称',
