@@ -10,7 +10,7 @@ export default class appManage extends Component {
     return (
       <div className="appManage-main">
           <Switch >
-            <Route exact path='/app-publish/app-manage/add' component={appManageAdd}></Route>
+            <Route  exact path='/app-publish/app-manage/add' component={appManageAdd}></Route>
             <Route path='/app-publish/app-manage' component={appManageList}></Route>
         </Switch>
       </div>

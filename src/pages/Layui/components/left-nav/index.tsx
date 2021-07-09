@@ -24,7 +24,7 @@ interface IState {
   menuList: List[],
 
 }
-class LeftNav extends React.Component<IProps, IState> {
+class LeftNav extends React.Component<any, IState> {
   constructor(props: any, context: any) {
     super(props)
     this.state = {
@@ -61,22 +61,35 @@ class LeftNav extends React.Component<IProps, IState> {
       }
     })
   }
+   // 查找需要让哪个Submenu展开(实现不了  报错)
+   _getOpenKeys(menuList:any,path:any){
+    for(let i=0; i<menuList.length; i++){
+        let item = menuList[i]
+        if(item.children && item.children.find((c_item:any)=>c_item._key === path)){
+            return item._key
+        }
+    }
+  }
   render() {
-    const { collapsed } = this.state;
+    let { collapsed } = this.state;
+    let path=this.props.history.location.pathname;
+    let ppath = path.substr(0, path.indexOf("/",2)) ? path.substr(0, path.indexOf("/",2)) : path
     return (
       <Sider collapsible collapsed={collapsed} onCollapse={e => this.onCollapse(e)}>
         <div className="logo" >
           <img src={logo} alt="" />
           <h1 className="title">运营支持系统</h1>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu 
+        theme="dark" 
+        defaultSelectedKeys={[path]} 
+        selectedKeys={[path,ppath]}
+        mode="inline">
           {
             this._renderMenu(this.state.menuList)
           }
-
         </Menu>
       </Sider>
-
     )
   }
 }

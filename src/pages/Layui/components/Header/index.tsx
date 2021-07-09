@@ -3,10 +3,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Layout, Breadcrumb ,Dropdown, Button,Menu ,message} from 'antd';
 // 引入路由部分
-import { Switch, Route, Redirect, Link ,withRouter} from "react-router-dom";
+import {  Link ,withRouter} from "react-router-dom";
 //ui
 import { DownOutlined } from '@ant-design/icons';
-import menu from "../left-nav/config/menuConfig.json";
 
 interface IProps {
     breadcrumb?:any
@@ -32,11 +31,11 @@ const tuichu = (
   }
  
 class Header extends React.Component <any,IState>{
-    
+  static propTypes = {
+    breadcrumb: PropTypes.array, 
+};
     render() {
-     
-        
-        let { breadcrumb } = this.props
+        const { breadcrumb } = this.props
         return (
             <div className="layui-header">
             <Breadcrumb style={{ margin: '16px 0' }}>

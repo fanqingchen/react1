@@ -5,7 +5,7 @@ const { Option } = Select;
 export default class appManageAdd extends Component <any,any>{
 
     onFinish=(values:any)=>{
-        console.log(values);
+        console.log("点击了确定按钮");
     }
     render() {
         return (
@@ -59,7 +59,7 @@ export default class appManageAdd extends Component <any,any>{
                        
                             <Button type="primary" htmlType="submit" >保存</Button>
                             <Divider type="vertical" />
-                            <Button>取消</Button>
+                            <Button onClick={e=>this.props.history.goBack()}>取消</Button>
                         
                     </Form.Item>
                 </Form>

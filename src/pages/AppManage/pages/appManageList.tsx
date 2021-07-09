@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { Button,Table, Space,Pagination } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { Button,Table, Space } from 'antd';
 
 interface IUser{
-    id:string;
-    key:string;
-    name:string;
-    age:number;
-    address:string;
-    tags:string[];
+  id:string;
+  key?:string;
+  name:string;
+  mc:string;
+  szm:string;
+  sshy:string;
+  yybm:string;
+  zxfbsj:string;
+  zxfbbb:string;
 }
 interface IProps{
-    name?:string;
-    age?:number;
-    auth?:boolean;
+  
 }
 
 interface IState{
@@ -40,49 +40,49 @@ const columns:any= [
      },
      {
        title: '应用名称',
-       dataIndex: 'age',
+       dataIndex: 'mc',
        key: 'age',
        align:"center",
      },
      {
        title: '应用首字母',
-       dataIndex: 'address',
+       dataIndex: 'szm',
        key: 'address',
        align:"center",
      },
      {
        title: '所属行业',
-       dataIndex: 'address',
+       dataIndex: 'sshy',
        key: 'address',
        align:"center",
      },
      {
        title: '应用包名',
-       dataIndex: 'address',
+       dataIndex: 'yybm',
        key: 'address',
        align:"center",
      },
      {
        title: '最新发布时间',
-       dataIndex: 'address',
+       dataIndex: 'zxfbsj',
        key: 'address',
        align:"center",
      },
      {
        title: '最新发布版本',
-       dataIndex: 'address',
+       dataIndex: 'zxfbbb',
        key: 'address',
        align:"center",
      },
      {
        title: '版本更新',
        key: 'tags',
-       dataIndex: 'tags',
+       dataIndex: 'bbgx',
        align:"center",
        render: (text:any, record:any) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <a>版本新增 </a>
+          <a>版本管理</a>
         </Space>
       ),
      },
@@ -92,7 +92,7 @@ const columns:any= [
        align:"center",
        render: (text:any, record:any) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
+          <a>修改应用 </a>
         </Space>
       ),
       
@@ -102,36 +102,44 @@ export default class AppManageList extends Component<any,IState>{
     constructor(props:any,context:any){
         super(props)
         this.state={
-        
             data:[
                 {
                   id:'1',
                   key: '1',
                   name: 'John Brown',
-                  age: 32,
-                  address: 'New York No. 1 Lake Park',
-                  tags: ['nice', 'developer'],
+                  mc: "测试应用",
+                  szm:"c",
+                  sshy:"期货",
+                  yybm:"Tencent.CeShi.com",
+                  zxfbsj:"2020.01.20",
+                  zxfbbb:"2.2.0",
                 },
                 {
                   id:'2',
                   key: '2',
-                  name: 'Jim Green',
-                  age: 42,
-                  address: 'London No. 1 Lake Park',
-                  tags: ['loser'],
+                  name: 'John Brown',
+                  mc: "测试应用",
+                  szm:"c",
+                  sshy:"投顾",
+                  yybm:"Tencent.CeShi.com",
+                  zxfbsj:"2020.01.20",
+                  zxfbbb:"2.2.0",
                 },
                 {
                   id:'3',
                   key: '3',
-                  name: 'Joe Black',
-                  age: 32,
-                  address: 'Sidney No. 1 Lake Park',
-                  tags: ['cool', 'teacher'],
+                  name: 'John Brown',
+                  mc: "测试应用",
+                  szm:"c",
+                  sshy:"股票",
+                  yybm:"Tencent.CeShi.com",
+                  zxfbsj:"2020.01.20",
+                  zxfbbb:"2.2.0",
                 },
+                
             ]
         }
     }
-  
     render() {
         return (
             < >
@@ -141,7 +149,6 @@ export default class AppManageList extends Component<any,IState>{
                 <Button className="title-btn" size='large' type='primary' onClick={()=>{
                   this.props.history.push({
                     pathname:"/app-publish/app-manage/add",
-                    
                   })
                 }}>新建应用</Button>
                 <Table

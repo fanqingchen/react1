@@ -1,15 +1,12 @@
 
-import React,{useState}from 'react'
+import React from 'react'
 // 左边
 import LeftNav from "./components/left-nav/index";
 // 右边
 import Header from './components/Header';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout} from 'antd';
 // 引入路由部分
-import { Switch, Route, Redirect, Link ,withRouter} from "react-router-dom";
-//ui
-import { Menu, Dropdown, Button, message } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Switch, Route, Redirect,withRouter} from "react-router-dom";
 // 引入自己写的数据
 import menu from "./components/left-nav/config/menuConfig.json";
 // 引入路由组件
@@ -38,8 +35,6 @@ interface IState {
   }
 
   render() {
-    
-    console.log("props",this.props,this.state.breadcrumbArr);
    const {breadcrumbArr}=this.state
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -79,24 +74,19 @@ interface IState {
       }
       //页面的地址更新后调用写面包屑的方法
       componentWillReceiveProps() {  
-          console.log("this.props",this.props);
-          
         this.writeBreadcrumb(this.props)
       }
       // 面包屑导航
       writeBreadcrumb(props: any) {
           let arr: any[] = [];
-          let pathname= props.history.location.pathname
-          let pathname1=pathname.split("/")
-          console.log("pathname1",pathname1);
-          
-          let pathname2=pathname1.splice(1,2)
-          let count=pathname.split("/").length
+          const pathname= props.history.location.pathname
+          const pathname1=pathname.split("/")
+          const pathname2=pathname1.splice(1,2)
+          const count=pathname.split("/").length
           // 如果count为3则是2级路由 如果为4则是3级路由
         //遍历一级导航
         if(count>3){
-          let pathname3="/"+pathname2.join("/")
-          console.log(pathname3);
+          const pathname3="/"+pathname2.join("/")
           menu.forEach(item => {
             //遍历二级导航
             if (item.children) {
@@ -117,6 +107,8 @@ interface IState {
             name: '添加',
             key: pathname,
           })
+         }else if(pathname1[1]==="edit"){
+          //  编辑
          }
         }else{
           menu.forEach(item => {
@@ -134,15 +126,9 @@ interface IState {
             }
           })
         }
-      
-        
-        console.log("arr", arr);
         //遍历完后赋值
         this.setState({
           breadcrumbArr:arr
-        },()=>{
-          console.log("breadcrumbArr",this.state.breadcrumbArr);
-          
         })
     
       }
