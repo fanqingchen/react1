@@ -85,26 +85,57 @@ interface IState {
       }
       // 面包屑导航
       writeBreadcrumb(props: any) {
-        let arr: any[] = [];
-        console.log("pathname",props.location.pathname);
-        
+          let arr: any[] = [];
           let pathname= props.history.location.pathname
-    
+          let pathname1=pathname.split("/")
+          console.log("pathname1",pathname1);
+          
+          let pathname2=pathname1.splice(1,2)
+          let count=pathname.split("/").length
+          // 如果count为3则是2级路由 如果为4则是3级路由
         //遍历一级导航
-        menu.forEach(item => {
-          //遍历二级导航
-          if (item.children) {
-            item.children.forEach((it:any)=> {
-              if (it._key === pathname) {
-                arr.push({
-                  path: it._key,
-                  name: it.title,
-                  key: it._key
-                })
-              }
-            });
-          }
-        })
+        if(count>3){
+          let pathname3="/"+pathname2.join("/")
+          console.log(pathname3);
+          menu.forEach(item => {
+            //遍历二级导航
+            if (item.children) {
+              item.children.forEach((it:any)=> {
+                if (it._key === pathname3) {
+                  arr.push({
+                    path: it._key,
+                    name: it.title,
+                    key: it._key
+                  })
+                }
+              });
+            }
+          })
+         if(pathname1[1]==="add"){
+          arr.push({
+            path: pathname,
+            name: '添加',
+            key: pathname,
+          })
+         }
+        }else{
+          menu.forEach(item => {
+            //遍历二级导航
+            if (item.children) {
+              item.children.forEach((it:any)=> {
+                if (it._key === pathname) {
+                  arr.push({
+                    path: it._key,
+                    name: it.title,
+                    key: it._key
+                  })
+                }
+              });
+            }
+          })
+        }
+      
+        
         console.log("arr", arr);
         //遍历完后赋值
         this.setState({

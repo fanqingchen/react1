@@ -1,6 +1,6 @@
 .appManage-main{
 
-
+    box-sizing: border-box;
     .mian-title{
         font-size: 50px;
         font-weight: 700;
@@ -8,14 +8,20 @@
     }
     .title-btn{
         color: #fff;
-        background-color: forestgreen;
         margin: 0 0 20px 0;
-        border: forestgreen;
     }
     .main-table{
 
         .table-img{
             width: 100%;
         }
+    }
+
+
+    // 添加的样式
+    .appManageAdd-btn{
+        margin-top: 200px;
+        display: flex;
+        justify-content: center;
     }
 }
