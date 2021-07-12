@@ -1,17 +1,18 @@
 
 import React from 'react'
 // 左边
-import LeftNav from "./components/left-nav/index";
+import LeftNav from "./pages/left-nav/index";
 // 右边
-import Header from './components/Header';
+import Header from './pages/Header';
 import { Layout} from 'antd';
 // 引入路由部分
 import { Switch, Route, Redirect,withRouter} from "react-router-dom";
 // 引入自己写的数据
-import menu from "./components/left-nav/config/menuConfig.json";
+import menu from "./pages/left-nav/config/menuConfig.json";
 // 引入路由组件
 import {
   AppManage,
+  AppPackage,
   Home
 } from "../index";
 const { Footer, Content } = Layout;
@@ -24,6 +25,7 @@ interface IState {
   breadcrumbArr: any,
   openKeys: object[],
 }
+
  class Layui extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
@@ -37,20 +39,20 @@ interface IState {
   render() {
    const {breadcrumbArr}=this.state
     return (
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ height: '100vh' }}>
         <LeftNav></LeftNav>
-        <Layout className="site-layout">
+        <Layout className="site-layout main-all">
           <Content style={{ margin: '0 16px' }}>
-
             <Header  
             breadcrumb={breadcrumbArr}
+            
             />
-
             <div className="context-style" style={{ padding: 24 }}>
               <Switch>
                 <Redirect exact path="/" to='/home'></Redirect>
                 <Route path="/home" component={Home}></Route>
                 <Route path="/app-publish/app-manage" component={AppManage}></Route>
+                <Route path="/app-publish/app-package" component={AppPackage}></Route>
               </Switch>
             </div>
           </Content>
@@ -85,6 +87,8 @@ interface IState {
           const count=pathname.split("/").length
           // 如果count为3则是2级路由 如果为4则是3级路由
         //遍历一级导航
+        console.log(count,pathname,pathname1);
+        
         if(count>3){
           const pathname3="/"+pathname2.join("/")
           menu.forEach(item => {
@@ -102,6 +106,8 @@ interface IState {
             }
           })
          if(pathname1[1]==="add"){
+           console.log(1);
+           
           arr.push({
             path: pathname,
             name: '添加',
