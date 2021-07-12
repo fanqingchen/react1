@@ -1,81 +1,102 @@
 import React, { Component } from 'react'
-import { Button,Table, Space , Row, Col,Radio,Form, Input, Checkbox,Select} from 'antd';
-
+import { Button,Table, Space , Row, Col,Radio,Form, Input, Checkbox,Select,Modal} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 const { Option } = Select;
+const { TextArea } = Input;
 const columns:any= [
-      
-    {
-     title: 'ID',
-     dataIndex: 'id',
-     key: 'id',
-     width:50,
-     align:"center",
-    },
      {
-       title: '应用logo',
+       title: '渠道编号',
        dataIndex: 'name',
        key: 'name',
        width:100,
        align:"center",
-       render:()=>{
-         return <img className="table-img" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F16%2F07%2F06%2F17577cd55945262.jpg%21r650&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1628319216&t=5989b051dc6080029c0b8648eeb22b56" alt="图片" />
-       }
      },
      {
-       title: '应用名称',
+       title: '渠道',
        dataIndex: 'mc',
        key: 'age',
        align:"center",
      },
      {
-       title: '应用首字母',
+       title: '平台',
        dataIndex: 'szm',
        key: 'address',
        align:"center",
      },
      {
-       title: '所属行业',
+       title: '应用版本',
        dataIndex: 'sshy',
        key: 'address',
        align:"center",
      },
      {
-       title: '应用包名',
+       title: '链接地址',
        dataIndex: 'yybm',
        key: 'address',
        align:"center",
+       render:(text:any,record:any)=>{
+         console.log(text,2,record);
+         
+         return(
+         <>
+            <TextArea rows={4} style={{width:"200px"}} value={text}></TextArea>
+            <Button type="primary"
+            onClick={()=>{
+                 Modal.confirm({
+                  title:'复制地址成功',
+                  icon:<ExclamationCircleOutlined />,
+                  content:`复制内容为${record.yybm}`,
+                  onOk:()=> {
+                     console.log(record.yybm);
+                    }
+                  })
+                }}
+            >复制链接地址</Button>
+         </>
+
+         )
+       }
      },
      {
-       title: '最新发布时间',
+       title: '计划ID',
        dataIndex: 'zxfbsj',
        key: 'address',
        align:"center",
+       render: (text:any, record:any) => (
+        <Space size="middle">
+          <a>222</a>
+        </Space>
+      ),
      },
      {
-       title: '最新发布版本',
+       title: '配置上报',
        dataIndex: 'zxfbbb',
        key: 'address',
        align:"center",
+       render: (text:any, record:any) => (
+        <Space size="middle">
+          <a>配置</a>
+        </Space>
+      ),
      },
      {
-       title: '版本更新',
+       title: '修改接入',
        key: 'tags',
        dataIndex: 'bbgx',
        align:"center",
        render: (text:any, record:any) => (
         <Space size="middle">
-          <a>版本新增 </a>
-          <a>版本管理</a>
+          <a>接入配置</a>
         </Space>
       ),
      },
      {
-       title: '操作',
+       title: '状态变更',
        key: 'action',
        align:"center",
        render: (text:any, record:any) => (
         <Space size="middle">
-          <a>修改应用 </a>
+          <a>生效 </a>
         </Space>
       ),
       
@@ -120,10 +141,36 @@ export default class appPackageList extends Component <any,any>{
                   zxfbsj:"2020.01.20",
                   zxfbbb:"2.2.0",
                 },
-                
+                {
+                  id:'4',
+                  key: '4',
+                  name: 'John Brown',
+                  mc: "测试应用",
+                  szm:"c",
+                  sshy:"股票",
+                  yybm:"Tencent.CeShi.com",
+                  zxfbsj:"2020.01.20",
+                  zxfbbb:"2.2.0",
+                },
+                {
+                  id:'5',
+                  key: '5',
+                  name: 'John Brown',
+                  mc: "测试应用",
+                  szm:"c",
+                  sshy:"股票",
+                  yybm:"Tencent.CeShi.com",
+                  zxfbsj:"2020.01.20",
+                  zxfbbb:"2.2.0",
+                },
             ],
             radioValue:1,
             expand:false,
+            pagination: {
+              current: 1,
+              pageSize: 3,
+            },
+            loading: false,
         }
     }
    
@@ -133,7 +180,15 @@ export default class appPackageList extends Component <any,any>{
         radioValue:e.target.value
       });
     }
+    handleTableChange(pagination:any){
+      this.setState({
+        pagination
+      })
+      
+    }
+   
     render() {
+      const { data, pagination, loading } = this.state;
         return (
           <div className="appPackage-main">
                   <h1 className="mian-title">
@@ -190,25 +245,18 @@ export default class appPackageList extends Component <any,any>{
                             })
                           }}>+新建应用</Button>
                         </Form.Item>
-
-                       
-                       
                         </Row>
-                        
                       </Form>
                     </div>
              
                 <Table
                 className="main-table"
                 columns={columns}
-                dataSource={this.state.data}
+                dataSource={data}
                 rowKey="id"
                 bordered
-                pagination={{
-                    total: this.state.data.length,
-                    pageSize: 5,
-                   
-                }}
+                pagination={pagination}
+                onChange={e=>this.handleTableChange(e)}
                >
                </Table>
             </div>
