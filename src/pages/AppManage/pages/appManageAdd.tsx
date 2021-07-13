@@ -56,11 +56,9 @@ export default class appManageAdd extends Component <any,any>{
                     </Form.Item>
 
                     <Form.Item className="appManageAdd-btn" >
-                       
                             <Button type="primary" htmlType="submit" >保存</Button>
                             <Divider type="vertical" />
-                            <Button onClick={e=>this.props.history.goBack()}>取消</Button>
-                        
+                            <Button onClick={e=>this.props.history.goBack() }>取消</Button>
                     </Form.Item>
                 </Form>
             </>

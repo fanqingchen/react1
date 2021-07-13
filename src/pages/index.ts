@@ -1,4 +1,4 @@
-// 此处是二级路由的懒加载
+// 此处是二级路由页面的懒加载
 import {lazy} from "react";
 const Home=lazy(()=>import("./Home"))
 const AppManage=lazy(()=>import("./AppManage"))
